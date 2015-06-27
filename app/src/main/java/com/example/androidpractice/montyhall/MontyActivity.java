@@ -6,11 +6,26 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.util.Log;
 
+import java.util.Random;
 
 public class MontyActivity extends ActionBarActivity {
+    // for debug purpose TAG created
+    String TAG = "Monty Debug:";
+
+    public int getRando() {
+        // give me a random number
+        Random randomGenerator = new Random();
+        // anything between 1 and 3 (thats 0,1,2)
+        int guessNumber = randomGenerator.nextInt(3);
+        Log.d(TAG, "random number made by getRando() : "+ guessNumber);
+       return guessNumber;
+    }
+    public int randomNumber = getRando();
 
     private AnswerBook mAnswerBook = new AnswerBook();
+    public String answer = mAnswerBook.getAnswers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +33,6 @@ public class MontyActivity extends ActionBarActivity {
         setContentView(R.layout.activity_monty);
 
         //Declare our view Variables
-
         final Button door1Button = (Button) findViewById(R.id.door1Button);
         final Button door2Button = (Button) findViewById(R.id.door2Button);
         final Button door3Button = (Button) findViewById(R.id.door3Button);
@@ -34,18 +48,28 @@ public class MontyActivity extends ActionBarActivity {
                 door1Button.setText("DOOR1");
                 door2Button.setText("DOOR2");
                 door3Button.setText("DOOR3");
+                randomNumber = getRando();
+                answer = mAnswerBook.getAnswers();
+                Log.d(TAG, "random made by reset: "+randomNumber);
+                Log.d(TAG, "new prize made by reset: "+answer);
 
+                //getRando();
             }
         };
 
         resetButton.setOnClickListener(resetListener);
-        
+
+
         View.OnClickListener door3Listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(randomNumber == 2){
+                    door3Button.setText(answer);
+                }else{
+                    door3Button.setText("GOAT!");
+                }
 
-                door3Button.setText(answer[3]);
             }
         };
 
@@ -55,7 +79,11 @@ public class MontyActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                door2Button.setText(answer[2]);
+                if(randomNumber == 1){
+                    door2Button.setText(answer);
+                }else{
+                    door2Button.setText("GOAT!");
+                }
 
             }
         };
@@ -65,7 +93,11 @@ public class MontyActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                door1Button.setText(answer[1]);
+                if(randomNumber == 0){
+                    door1Button.setText(answer);
+                }else{
+                    door1Button.setText("GOAT!");
+                }
             }
         };
 
