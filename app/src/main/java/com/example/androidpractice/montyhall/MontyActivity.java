@@ -37,7 +37,16 @@ public class MontyActivity extends ActionBarActivity {
         final Button door2Button = (Button) findViewById(R.id.door2Button);
         final Button door3Button = (Button) findViewById(R.id.door3Button);
         final Button resetButton = (Button) findViewById(R.id.resetButton);
-        Button quitButton = (Button) findViewById(R.id.quitButton);
+        final Button quitButton = (Button) findViewById(R.id.quitButton);
+
+        View.OnClickListener quitListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.exit(0);
+            }
+        };
+
+        quitButton.setOnClickListener(quitListener);
 
         //Reset Button doors values
 
@@ -67,7 +76,7 @@ public class MontyActivity extends ActionBarActivity {
                 if(randomNumber == 2){
                     door3Button.setText(answer);
                 }else{
-                    door3Button.setText("GOAT!");
+                    door3Button.setText("NO PRIZE HERE");
                 }
 
             }
@@ -82,7 +91,7 @@ public class MontyActivity extends ActionBarActivity {
                 if(randomNumber == 1){
                     door2Button.setText(answer);
                 }else{
-                    door2Button.setText("GOAT!");
+                    door2Button.setText("NO PRIZE HERE");
                 }
 
             }
@@ -96,7 +105,7 @@ public class MontyActivity extends ActionBarActivity {
                 if(randomNumber == 0){
                     door1Button.setText(answer);
                 }else{
-                    door1Button.setText("GOAT!");
+                    door1Button.setText("NO PRIZE HERE");
                 }
             }
         };
